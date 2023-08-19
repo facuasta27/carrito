@@ -82,7 +82,7 @@ function eliminarDelCarrito(e) {
 
 }
 
-// botonVaciar.addEventListener("click", vaciarCarrito);
+botonVaciar.addEventListener("click", vaciarCarrito);
 
 function vaciarCarrito() {
 
@@ -93,20 +93,34 @@ function vaciarCarrito() {
 }
 
 
-botonComprar.addEventListener("click", comprarCarrito);
+// ' '
+
+
+// botonComprar.addEventListener("click", comprarCarrito);
+
+botonComprar.addEventListener("click", () => {
+    Swal.fire({
+        icon: 'success',
+        tittle: 'Gracias por su compra,vuelva pronto',
+        text: 'Gracias por su compra,vuelva pronto',
+
+    })
+    comprarCarrito();
+}
+);
 
 function comprarCarrito() {
-    if (productosEnCarrito.length > 0) {
+    productosEnCarrito.length = 0;
 
-        alert("gracias por tu compra");
+    localStorage.setItem("productos-en-carrito", JSON.stringify(productosEnCarrito));
 
-        localStorage.setItem("productos-en-carrito", JSON.stringify(productosEnCarrito));
+    contenedorCarritoVacio.classList.remove("disabled");
+    contenedorCarritoProductos.classList.add("disabled");
+    contenedorCarritoAcciones.classList.add("disabled");
+    productosEnCarrito.length = 0;
+    // contenedorCarritoComprado.classList.remove("disabled");
 
-        contenedorCarritoVacio.classList.remove("disabled");
-        contenedorCarritoProductos.classList.add("disabled");
-        contenedorCarritoAcciones.classList.add("disabled");
-        productosEnCarrito.length = 0;
-        // contenedorCarritoComprado.classList.remove("disabled");
-    }
+    cargarProductosCarrito();
+
 }
 
