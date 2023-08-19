@@ -1,14 +1,20 @@
-const productosEnCarrito = JSON.parse(localStorage.getItem("productos-en-carrito"));
+let productosEnCarrito = localStorage.getItem("productos-en-carrito") || [];
+
+productosEnCarrito = JSON.parse(productosEnCarrito);
 
 const contenedorCarritoVacio = document.querySelector("#carrito-vacio");
 const contenedorCarritoProductos = document.querySelector("#carrito-productos");
 const contenedorCarritoAcciones = document.querySelector("#carrito-acciones");
 const contenedorCarritoComprado = document.querySelector("#carrito-comprado");
 let botonesEliminar = document.querySelector(".carrito-producto-eliminar");
+let botonVaciar = document.querySelector("#carrito-acciones-vaciar")
+let botonComprar = document.querySelector("#carrito-acciones-comprar")
 
 function cargarProductosCarrito() {
 
-    if (productosEnCarrito) {
+    if (productosEnCarrito && productosEnCarrito.length >= 0) {
+
+
         contenedorCarritoVacio.style.display = `none`;
         contenedorCarritoProductos.classList.remove("disabled");
         contenedorCarritoAcciones.classList.remove("disabled");
@@ -45,6 +51,7 @@ function cargarProductosCarrito() {
         contenedorCarritoVacio.classList.remove("disabled");
         contenedorCarritoProductos.classList.add("disabled");
         contenedorCarritoAcciones.classList.add("disabled");
+        productosEnCarrito.length = 0;
         // contenedorCarritoComprado.classList.add("disabled");
     };
 
@@ -71,11 +78,35 @@ function eliminarDelCarrito(e) {
 
     cargarProductosCarrito();
 
-    localStorage.setItem("productos-en-carrito", JSON.stringify.productosEnCarrito);
+    localStorage.setItem("productos-en-carrito", JSON.stringify(productosEnCarrito));
+
+}
+
+// botonVaciar.addEventListener("click", vaciarCarrito);
+
+function vaciarCarrito() {
+
+    productosEnCarrito.length = 0;
+    localStorage.setItem("productos-en-carrito", JSON.stringify(productosEnCarrito));
+    cargarProductosCarrito();
+
 }
 
 
+botonComprar.addEventListener("click", comprarCarrito);
 
+function comprarCarrito() {
+    if (productosEnCarrito.length > 0) {
 
+        alert("gracias por tu compra");
 
+        localStorage.setItem("productos-en-carrito", JSON.stringify(productosEnCarrito));
+
+        contenedorCarritoVacio.classList.remove("disabled");
+        contenedorCarritoProductos.classList.add("disabled");
+        contenedorCarritoAcciones.classList.add("disabled");
+        productosEnCarrito.length = 0;
+        // contenedorCarritoComprado.classList.remove("disabled");
+    }
+}
 
