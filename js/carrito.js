@@ -84,7 +84,7 @@ function eliminarDelCarrito(e) {
 
 // botonVaciar.addEventListener("click", vaciarCarrito);
 
-botonVaciar.addEventListener("click", () =>{
+botonVaciar.addEventListener("click", () => {
     Swal.fire({
         icon: 'error',
         text: ' Que lastima que vacies tu carrito, deseamos que vuelva pronto',
@@ -108,14 +108,27 @@ function vaciarCarrito() {
 // botonComprar.addEventListener("click", comprarCarrito);
 
 botonComprar.addEventListener("click", () => {
-    Swal.fire({
-        icon: 'success',
-        tittle: 'Gracias por su compra,vuelva pronto',
-        text: 'Gracias por su compra,vuelva pronto',
+    if (productosEnCarrito.length >= 1) {
+        Swal.fire({
+            icon: 'success',
+            tittle: 'Gracias por su compra,vuelva pronto',
+            text: 'Gracias por su compra,vuelva pronto',
 
-    })
-    comprarCarrito();
+        })
+        comprarCarrito();
+    } else
+    {
+        Swal.fire({
+            icon: 'error',
+            tittle: 'No tiene productos en carrito',
+            text: 'No tiene productos en carrito',
+
+        })
+
+
+    }
 }
+
 );
 
 function comprarCarrito() {
@@ -123,7 +136,7 @@ function comprarCarrito() {
 
     localStorage.setItem("productos-en-carrito", JSON.stringify(productosEnCarrito));
 
-    contenedorCarritoVacio.classList.remove("disabled");
+    contenedorCarritoVacio.classList.add("disabled");
     contenedorCarritoProductos.classList.add("disabled");
     contenedorCarritoAcciones.classList.add("disabled");
     productosEnCarrito.length = 0;
