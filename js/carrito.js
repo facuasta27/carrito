@@ -84,14 +84,26 @@ function eliminarDelCarrito(e) {
 
 // botonVaciar.addEventListener("click", vaciarCarrito);
 
-botonVaciar.addEventListener("click", () => {
-    Swal.fire({
-        icon: 'error',
-        text: ' Que lastima que vacies tu carrito, deseamos que vuelva pronto',
 
-    })
-    vaciarCarrito();
+botonVaciar.addEventListener("click", () => {
+    if (productosEnCarrito.length <= 0) {
+        Swal.fire({
+            icon: 'error',
+            text: ' No tiene productos en carrito',
+
+        })
+        vaciarCarrito();
+    } else {
+        Swal.fire({
+            text: ' Que lastima que vacies tu carrito, deseamos que vuelva pronto',
+        })
+vaciarCarrito();
+    }
+
 })
+
+
+
 
 function vaciarCarrito() {
 
@@ -116,8 +128,7 @@ botonComprar.addEventListener("click", () => {
 
         })
         comprarCarrito();
-    } else
-    {
+    } else {
         Swal.fire({
             icon: 'error',
             tittle: 'No tiene productos en carrito',
