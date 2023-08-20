@@ -11,3 +11,29 @@ ul{
 a{
     text-decoration: none;
 }
+
+
+
+nav ul{
+    background-color: blue;
+    display: flex;
+    gap: 50px;
+    color: white;
+
+
+}
+
+nav ul li a{
+    color: white;
+}
+
+
+main{
+    background-color: gainsboro;
+
+}
+
+main div{
+    display: flex;
+    gap: 50px;
+}

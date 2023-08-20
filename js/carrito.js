@@ -82,7 +82,16 @@ function eliminarDelCarrito(e) {
 
 }
 
-botonVaciar.addEventListener("click", vaciarCarrito);
+// botonVaciar.addEventListener("click", vaciarCarrito);
+
+botonVaciar.addEventListener("click", () =>{
+    Swal.fire({
+        icon: 'error',
+        text: ' Que lastima que vacies tu carrito, deseamos que vuelva pronto',
+
+    })
+    vaciarCarrito();
+})
 
 function vaciarCarrito() {
 
